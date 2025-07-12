@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Malla Curricular de Sociología</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(to bottom, #003f5c, #ffffff);
+      color: #000;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .semestre {
+      background-color: white;
+      border-radius: 10px;
+      padding: 16px;
+      width: 250px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .semestre h3 {
+      color: #0074D9;
+      margin-top: 0;
+    }
+    .curso {
+      cursor: pointer;
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .curso:hover {
+      background-color: #f0f8ff;
+    }
+    #detalle {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+      border-left: 5px solid #0074D9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Malla Curricular de Sociología</h1>
+
+<div class="container" id="malla">
+  <!-- Semestres se insertan desde JavaScript -->
+</div>
+
+<div id="detalle">
+  <h2 id="detalleTitulo"></h2>
+  <p id="detalleTexto"></p>
+</div>
+
+<script>
+  const malla = {
+    "Semestre 1": [
+      "Introducción a la Sociología",
+      "Autorregulación: Taller de Escritura Sociológica I",
+      "Pensamiento Lógico Matemático",
+      "Introducción a las Ciencias Sociales",
+      "Historia Social y Política Latinoamericana",
+      "Inglés I"
+    ],
+    "Semestre 2": [
+      "Teoría Sociológica Clásica",
+      "Taller de Escritura Sociológica II",
+      "Introducción a los Métodos de Investigación Social",
+      "Teoría Política",
+      "Historia Social y Política de Chile Siglo XX",
+      "Inglés II"
+    ],
+    "Semestre 3": [
+      "Teoría Sociológica Moderna",
+      "Sociología del Género",
+      "Métodos Cuantitativos I",
+      "Economía",
+      "Electivo",
+      "Inglés III"
+    ],
+    "Semestre 4": [
+      "Teoría Social y Sociología Latinoamericanas",
+      "Sociología de los Derechos Humanos",
+      "Estadística I",
+      "Políticas Públicas",
+      "Métodos Cualitativos I",
+      "Inglés IV"
+    ],
+    "Semestre 5": [
+      "Teoría Social Contemporánea I",
+      "Práctica Temprana: TIPE I",
+      "Estadística II",
+      "Taller de Formulación de Proyectos Sociales",
+      "Electivo de Especialización I"
+    ],
+    "Semestre 6": [
+      "Teoría Social Contemporánea II",
+      "Práctica Temprana: TIPE II",
+      "Sociología y Ciclos de Vida",
+      "Taller de Evaluación de Proyectos Sociales",
+      "Método Cualitativos II"
+    ],
+    "Semestre 7": [
+      "Estructura Social y Desigualdad",
+      "Práctica Temprana III: TIPE",
+      "Métodos Cuantitativos II",
+      "Electivo de Especialización II",
+      "Acción Colectiva y Movimientos Sociales"
+    ],
+    "Semestre 8": [
+      "Seminario Teórico",
+      "Taller de Escritura Sociológica y Comunicaciones",
+      "Seminario Metodológico",
+      "Sociología del Territorio"
+    ],
+    "Semestre 9": [
+      "Práctica Profesional"
+    ],
+    "Semestre 10": [
+      "Seminario de Titulación"
+    ]
+  };
+
+  const descripciones = {
+    "Introducción a la Sociología": "Explora los fundamentos de la disciplina sociológica y su desarrollo histórico.",
+    "Teoría Sociológica Clásica": "Estudia a los principales autores clásicos: Marx, Durkheim, Weber.",
+    "Teoría Sociológica Moderna": "Analiza corrientes sociológicas posteriores al siglo XIX.",
+    "Sociología del Género": "Aborda las desigualdades y construcciones sociales en torno al género.",
+    "Estadística I": "Fundamentos de estadística descriptiva para ciencias sociales.",
+    "Práctica Profesional": "Etapa final de formación en terreno.",
+    "Seminario de Titulación": "Curso final enfocado en el desarrollo de la tesis o trabajo de titulación.",
+    // Puedes seguir completando...
+  };
+
+  const mallaDiv = document.getElementById("malla");
+
+  for (const [semestre, cursos] of Object.entries(malla)) {
+    const col = document.createElement("div");
+    col.className = "semestre";
+    col.innerHTML = `<h3>${semestre}</h3>`;
+    cursos.forEach(curso => {
+      const div = document.createElement("div");
+      div.className = "curso";
+      div.textContent = curso;
+      div.onclick = () => mostrarDetalle(curso);
+      col.appendChild(div);
+    });
+    mallaDiv.appendChild(col);
+  }
+
+  function mostrarDetalle(curso) {
+    const detalle = document.getElementById("detalle");
+    const titulo = document.getElementById("detalleTitulo");
+    const texto = document.getElementById("detalleTexto");
+    titulo.textContent = curso;
+    texto.textContent = descripciones[curso] || "Descripción no disponible.";
+    detalle.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
